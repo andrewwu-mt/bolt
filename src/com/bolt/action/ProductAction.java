@@ -5,10 +5,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.bolt.dao.CategoryDAO;
@@ -28,6 +28,7 @@ public class ProductAction extends ActionSupport{
 	 */
 	private static final long serialVersionUID = -8753468506104304065L;
 	
+	private static final Logger log = Logger.getLogger(ProductAction.class);
 	
 	private ProductDAO productDAO;
 	private TypeDAO typeDAO;
@@ -158,7 +159,7 @@ public class ProductAction extends ActionSupport{
 			stockDAO.save(stock);
 			
 		}catch(Exception e){
-			e.printStackTrace();
+			log.error("Save product error", e);
 			return "saveerror";
 		}
 		return "successsave";
@@ -195,7 +196,7 @@ public class ProductAction extends ActionSupport{
 			productDAO.update(product);
 			
 		}catch(Exception e){
-			e.printStackTrace();
+			log.error("Update product error", e);
 			return "updateerror";
 		}
 		return SUCCESS;
